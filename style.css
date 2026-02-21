@@ -246,3 +246,81 @@ body.dark-mode {
 body.dark-mode .submit-button {
     color: #1a1a1a;
 }
+
+/* Classifier Styles */
+.classifier-section {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.classifier-desc {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 1.5rem;
+}
+
+body.dark-mode .classifier-desc {
+    color: #aaa;
+}
+
+#webcam-container {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto 1.5rem;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px var(--shadow-color);
+    background: #000;
+}
+
+#webcam-container canvas {
+    width: 100% !important;
+    height: auto !important;
+    display: block;
+}
+
+#label-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.prediction-item {
+    background: var(--light-gray);
+    padding: 0.75rem;
+    border-radius: 8px;
+    font-weight: 600;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color 0.3s ease;
+}
+
+body.dark-mode .prediction-item {
+    background: #3d3d3d;
+}
+
+.prediction-bar {
+    height: 8px;
+    background: var(--main-color);
+    border-radius: 4px;
+    transition: width 0.3s ease;
+}
+
+.start-classifier-btn {
+    background-color: var(--main-color);
+    color: var(--white);
+    border: none;
+    border-radius: 8px;
+    padding: 1rem 2rem;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.start-classifier-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(74, 144, 226, 0.4);
+}

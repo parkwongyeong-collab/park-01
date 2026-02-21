@@ -92,3 +92,64 @@ document.addEventListener('DOMContentLoaded', () => {
 
     renderTasks();
 });
+
+// Teachable Machine Classifier Logic
+const URL = "https://teachablemachine.withgoogle.com/models/nVPFZXY4X/";
+
+let model, webcam, labelContainer, maxPredictions;
+
+async function initClassifier() {
+    const startBtn = document.querySelector('.start-classifier-btn');
+    startBtn.disabled = true;
+    startBtn.textContent = "Loading Model...";
+
+    const modelURL = URL + "model.json";
+    const metadataURL = URL + "metadata.json";
+
+    try {
+        model = await tmImage.load(modelURL, metadataURL);
+        maxPredictions = model.getTotalClasses();
+
+        // Convenience function to setup a webcam
+        const flip = true; // whether to flip the webcam
+        webcam = new tmImage.Webcam(400, 400, flip); // width, height, flip
+        await webcam.setup(); // request access to the webcam
+        await webcam.play();
+        window.requestAnimationFrame(loop);
+
+        // append elements to the DOM
+        document.getElementById("webcam-container").appendChild(webcam.canvas);
+        labelContainer = document.getElementById("label-container");
+        for (let i = 0; i < maxPredictions; i++) {
+            const div = document.createElement("div");
+            div.className = "prediction-item";
+            labelContainer.appendChild(div);
+        }
+        startBtn.style.display = "none";
+    } catch (e) {
+        console.error(e);
+        startBtn.disabled = false;
+        startBtn.textContent = "Error Loading Camera";
+    }
+}
+
+async function loop() {
+    webcam.update(); // update the webcam frame
+    await predict();
+    window.requestAnimationFrame(loop);
+}
+
+async function predict() {
+    const prediction = await model.predict(webcam.canvas);
+    for (let i = 0; i < maxPredictions; i++) {
+        const classPrediction =
+            prediction[i].className + ": " + (prediction[i].probability * 100).toFixed(0) + "%";
+        labelContainer.childNodes[i].innerHTML = `
+            <span>${prediction[i].className}</span>
+            <div style="flex-grow: 1; margin: 0 1rem;">
+                <div class="prediction-bar" style="width: ${prediction[i].probability * 100}%"></div>
+            </div>
+            <span>${(prediction[i].probability * 100).toFixed(0)}%</span>
+        `;
+    }
+}
