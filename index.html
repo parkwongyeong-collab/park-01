@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Park Classifier & To-Do</title>
+    <title>Park Classifier & Productivity Hub</title>
+    <meta name="description" content="An advanced AI-powered face classifier and productivity to-do list for efficient daily management.">
     <meta name="google-adsense-account" content="ca-pub-6377568458810403">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6377568458810403"
          crossorigin="anonymous"></script>
@@ -16,50 +17,84 @@
     <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
 </head>
 <body>
+    <header class="main-header">
+        <nav class="nav-container">
+            <a href="#" class="logo">Park AI & To-Do</a>
+            <div class="nav-links">
+                <a href="#classifier">AI Classifier</a>
+                <a href="#todo">Tasks</a>
+                <a href="#about">About</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
+                <svg id="theme-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-sun"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+            </button>
+        </nav>
+    </header>
+
     <main class="app-container">
-        <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
-            <svg id="theme-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-sun"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
-        </button>
-        
-        <section class="classifier-section">
+        <section id="classifier" class="classifier-section">
             <h1 class="hero-title">Who is this?</h1>
-            <p class="classifier-desc">Distinguish between Park Onyu and Park Sarang</p>
+            <p class="classifier-desc">Utilizing Google's Teachable Machine technology to distinguish between Park Onyu and Park Sarang in real-time. This AI model has been trained on thousands of samples to ensure high accuracy.</p>
             <div id="webcam-container"></div>
             <div id="label-container"></div>
-            <button type="button" class="start-classifier-btn" onclick="initClassifier()">Start Camera</button>
+            <button type="button" class="start-classifier-btn" onclick="initClassifier()">Launch AI Camera</button>
         </section>
 
         <hr class="divider">
 
-        <h1 class="hero-title">My To-Do List</h1>
-        <form id="add-task-form" class="add-task-container">
-            <input type="text" id="task-input" placeholder="Add a new task..." aria-label="Add a new task">
-            <button type="submit" class="add-button">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
-            </button>
-        </form>
-        <ul id="task-list" class="task-list-container">
-            <!-- Tasks will be rendered here by JavaScript -->
-        </ul>
+        <section id="todo" class="todo-section">
+            <h2 class="hero-title">Productivity Tasks</h2>
+            <p class="section-desc">Manage your daily workflow with our simple yet powerful to-do list. Stay organized and boost your efficiency.</p>
+            <form id="add-task-form" class="add-task-container">
+                <input type="text" id="task-input" placeholder="What needs to be done?" aria-label="Add a new task">
+                <button type="submit" class="add-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                </button>
+            </form>
+            <ul id="task-list" class="task-list-container">
+                <!-- Tasks will be rendered here -->
+            </ul>
+        </section>
 
         <hr class="divider">
 
-        <h2 class="partnership-title">Partnership Inquiry</h2>
-        <form action="https://formspree.io/f/mgollgoq" method="POST" class="partnership-form">
-            <div class="form-group">
-                <label for="name">Name</label>
-                <input type="text" id="name" name="name" placeholder="Your Name" required>
+        <section id="about" class="about-section">
+            <h2 class="partnership-title">About the Project</h2>
+            <div class="content-text">
+                <p>Park AI Classifier & To-Do is a specialized application designed for both demonstration and daily utility. Our AI component uses TensorFlow.js to perform on-device inference, ensuring user privacy by processing all camera frames locally. The goal is to provide a seamless blend of artificial intelligence and essential productivity tools in a modern, user-friendly interface.</p>
             </div>
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" id="email" name="_replyto" placeholder="your@email.com" required>
+        </section>
+
+        <hr class="divider">
+
+        <section id="contact" class="contact-section">
+            <h2 class="partnership-title">Partnership Inquiry</h2>
+            <p class="section-desc">Interested in collaborating or have a business inquiry? Send us a message below.</p>
+            <form action="https://formspree.io/f/mgollgoq" method="POST" class="partnership-form">
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" name="name" placeholder="John Doe" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Business Email</label>
+                    <input type="email" id="email" name="_replyto" placeholder="john@example.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Your Message</label>
+                    <textarea id="message" name="message" placeholder="Briefly describe your proposal..." required></textarea>
+                </div>
+                <button type="submit" class="submit-button">Submit Inquiry</button>
+            </form>
+        </section>
+
+        <footer class="main-footer">
+            <p>&copy; 2026 Park AI & To-Do. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
             </div>
-            <div class="form-group">
-                <label for="message">Message</label>
-                <textarea id="message" name="message" placeholder="How can we work together?" required></textarea>
-            </div>
-            <button type="submit" class="submit-button">Send Inquiry</button>
-        </form>
+        </footer>
     </main>
     <script src="main.js"></script>
 </body>
